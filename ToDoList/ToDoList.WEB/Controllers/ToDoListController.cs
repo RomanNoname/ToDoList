@@ -4,11 +4,11 @@ using ToDoList.WEB.Models;
 
 namespace ToDoList.WEB.Controllers
 {
-    public class HomeController : Controller
+    public class ToDoListController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ToDoListController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ToDoListController(ILogger<ToDoListController> logger)
         {
             _logger = logger;
         }
@@ -17,11 +17,7 @@ namespace ToDoList.WEB.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+               
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

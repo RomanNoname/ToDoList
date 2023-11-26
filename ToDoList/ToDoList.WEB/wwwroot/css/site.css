@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+.my-navbar {
+    background-color: rgb(46,95,156) !important;
+}
+.my-navbar a{
+    color: white !important;
+}
