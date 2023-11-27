@@ -1,15 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
+using ToDoList.BLL.Interfaces;
+using ToDoList.BLL.Services;
+using ToDoList.DAL;
+using ToDoList.DAL.Interfaces;
+using ToDoList.DAL.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ApplicationDbContext)))
+);
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IToDoListItemRepository, ToDoListItemRepository>();
+builder.Services.AddScoped<IToDoListItemService, ToDoListItemService>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/ToDoList/Error");
     app.UseHsts();
 }
 
@@ -19,9 +32,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapGet("/myroot", (ApplicationDbContext db) => db.ToDoListItems.ToList());
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=ToDoList}/{action=Index}/{id?}");
 
 app.Run();
