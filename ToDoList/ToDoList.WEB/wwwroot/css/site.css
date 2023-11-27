@@ -26,3 +26,59 @@ body {
 .my-navbar a{
     color: white !important;
 }
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#taskInput {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#addTaskBtn {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+.taskItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 10px;
+    width: 80%;
+}
+
+    .taskItem span {
+        flex-grow: 1;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+        .taskItem span.completed {
+            text-decoration: line-through;
+        }
+
+    .taskItem button {
+        color: #fff;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+    }
+.green-btn
+{
+    background-color: greenyellow;
+}
+.red-btn
+{
+    background-color: orangered;
+}

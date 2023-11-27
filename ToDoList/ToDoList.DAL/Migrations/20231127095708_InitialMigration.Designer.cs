@@ -12,7 +12,7 @@ using ToDoList.DAL;
 namespace ToDoList.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231126221623_InitialMigration")]
+    [Migration("20231127095708_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -39,9 +39,8 @@ namespace ToDoList.DAL.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasAnnotation("MinLength", 3);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");

@@ -11,8 +11,8 @@ namespace ToDoList.DAL.EntityConfigurations
         {
             builder.Property(p => p.Title)
                    .HasMaxLength(FieldsValidation.ToDoListItem.TitleMaxLength)
-                   .IsRequired()
-                   .HasAnnotation("MinLength", FieldsValidation.ToDoListItem.TitleMinLength);
+                   .IsRequired();
+                  
         }
     }
 }
