@@ -4,7 +4,7 @@ namespace ToDoList.Domain.DTO
 {
     public record class UpdateToDoListItemDTO(
         Guid Id,
-        [MaxLength(200)]
+        [MaxLength(100)]
         [Required]
         string Title,
         bool IsFinished,
