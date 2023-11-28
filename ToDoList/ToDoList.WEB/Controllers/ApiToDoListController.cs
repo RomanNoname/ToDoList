@@ -17,8 +17,6 @@ namespace ToDoList.WEB.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(CreateToDoListItemDTO item)
         {
             var result = await  _listItemService.CreateToDoListItem(item);
@@ -27,8 +25,6 @@ namespace ToDoList.WEB.Controllers
         }
 
         [HttpDelete]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(Guid id)
         {
            await _listItemService.DeleteToDoListItemAsync(id);
@@ -36,8 +32,6 @@ namespace ToDoList.WEB.Controllers
             return NoContent();
         }
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update(UpdateToDoListItemDTO item)
         {
             await _listItemService.UpdateToDoListItemAsync(item);

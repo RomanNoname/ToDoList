@@ -4,7 +4,8 @@ namespace ToDoList.Domain.DTO
 {
     public class CreateToDoListItemDTO
     {
-        [MaxLength(200)]
+        [MaxLength(100)]
+        [Required]
         public string Title {  get; set; }
     }
 }

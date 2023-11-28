@@ -48,14 +48,12 @@ body {
 }
 
 .taskItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
     margin: 5px 0;
     padding: 10px;
     width: 80%;
+    overflow: auto;
 }
 
     .taskItem span {
@@ -63,10 +61,11 @@ body {
         margin-right: 10px;
         cursor: pointer;
     }
-
-        .taskItem span.completed {
-            text-decoration: line-through;
-        }
+.completed {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    color:gray;
+}
 
     .taskItem button {
         color: #fff;
@@ -74,11 +73,52 @@ body {
         padding: 8px;
         cursor: pointer;
     }
-.green-btn
-{
+.green-btn {
+    margin-left: 10px;
     background-color: greenyellow;
+    border-radius: 5px;
+    border-width: 0px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #0a0909;
+    font-size: 18px;
 }
-.red-btn
-{
+.red-btn {
     background-color: orangered;
+    border-radius: 5px;
+    border-width: 0px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    color: antiquewhite;
+    font-size: 18px;
+}
+.add-btn {
+    background-color: rgb(46,95,156);
+    border: solid 0px;
+    border-radius: 5px;
+    color: white;
+    margin-left: 10px;
+}
+.countCharacters
+{
+    margin-top: 10px;
+    color: gray;
+    font-size: small;
+  
+}
+.taskItem input[type="checkbox"] {
+    margin-right: 8px;
+}
+.btn-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.taskItemContainer:hover .btn-container {
+    opacity: 0.9;
 }

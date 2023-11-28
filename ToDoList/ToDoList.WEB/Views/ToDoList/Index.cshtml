@@ -8,23 +8,28 @@
     @{
         <div>
             <form id="taskForm">
-                <input type="text" id="taskInput" placeholder="Введите задание" oninput="countCharacters()" onkeydown="handleKeyDown(event)">
-                <span id="charCount">0</span> символов
-                <button type="button" onclick="addTask(event)" id="addTaskBtn">Добавить задание</button>
+                <input type="text" id="taskInput" minlength="1" placeholder="Input title" maxlength="@ToDoList.Domain.FieldsValidation.ToDoListItem.TitleMaxLength" oninput="countCharacters()" onkeydown="handleKeyDown(event)">
+               
+                <button type="button" class="add-btn" onclick="addTask(event)" id="addTaskBtn">Add task</button>
             </form>
         </div>
-
+        <div class="countCharacters">
+            <span  id="charCount">0</span> characters
+        </div>
+        <br/>
+        <br />
 
 
         <div id="taskList">
             @foreach (var item in Model)
             {
-                <div style="display:flex" id="@item.Id">
-                    <div class="taskItem" onclick="toggleCompleted(this, @item.ToString())">
-                        <span class="@((item.IsFinished ? "completed" : ""))">@item.Title</span>
+                <div class="taskItemContainer" style="display:flex" id="@item.Id" >
+                    <div class="taskItem">
+                        <input id ="checkbox_@item.Id" type="checkbox" onchange="toggleCompleted(@item)" @(item.IsFinished ? "checked" : "")>
+                        <label id="label_@item.Id" for="checkbox_@item.Id" class="@((item.IsFinished ? "completed" : ""))">@item.Title</label>
                     </div>
-                    <div>
-                        <button class="green-btn" onclick="editTask(@item.ToString())">Edit</button>
+                    <div class="btn-container">
+                        <button class="green-btn" onclick="editTask(@item)">Edit</button>
                         <button class="red-btn" onclick="deleteTask('@item.Id')">Delete</button>
                     </div>
                 </div>
@@ -32,4 +37,12 @@
             }
         </div>
     }
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Do you really want to delete?</p>
+        <button onclick="deleteItem()">Yes, Delete</button>
+    </div>
 </div>
