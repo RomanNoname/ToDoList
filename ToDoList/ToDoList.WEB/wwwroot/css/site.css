@@ -112,6 +112,10 @@ body {
 .taskItem input[type="checkbox"] {
     margin-right: 8px;
 }
+.taskItemContainer
+{
+    display: flex;
+}
 .btn-container {
     display: flex;
     justify-content: space-around;

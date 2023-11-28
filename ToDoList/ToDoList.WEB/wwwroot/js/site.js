@@ -118,7 +118,7 @@ function addTask() {
 
             response.Id = response.id;
 
-            divContainer.style.display = 'flex';
+            divContainer.classList.add('taskItemContainer');
             divContainer.id = response.id;
 
             var divItem = document.createElement('div');

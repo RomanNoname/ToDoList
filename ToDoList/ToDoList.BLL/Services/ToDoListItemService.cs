@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ToDoList.BLL.Interfaces;
 using ToDoList.DAL.Interfaces;
 using ToDoList.Domain.DTO;
@@ -16,19 +17,19 @@ namespace ToDoList.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<GetToDoListItemDTO> CreateToDoListItem(CreateToDoListItemDTO dto)
+        public async Task<GetToDoListItemDTO> CreateToDoListItemAsync(CreateToDoListItemDTO dto, CancellationToken cancellationToken)
         {
             var item = _mapper.Map<ToDoListItem>(dto);
 
-            await _service.CreateToDoListItemAsync(item);
-            await _service.SaveChangeAsync();
+            await _service.CreateToDoListItemAsync(item, cancellationToken);
+            await _service.SaveChangeAsync(cancellationToken);
 
             return _mapper.Map<GetToDoListItemDTO>(item);
         }
 
-        public async Task DeleteToDoListItemAsync(Guid id)
+        public async Task DeleteToDoListItemAsync(Guid id, CancellationToken cancellationToken)
         {
-            var item = await _service.GetByIdAsync(id);
+            var item = await _service.GetByIdAsync(id, cancellationToken);
 
             if (item == null)
             {
@@ -36,20 +37,20 @@ namespace ToDoList.BLL.Services
             }
 
             _service.DeleteToDoListItem(item);
-            await _service.SaveChangeAsync();
+            await _service.SaveChangeAsync(cancellationToken);
 
         }
 
-        public async Task<IEnumerable<GetToDoListItemDTO>> GetAllAsync()
+        public async Task<IEnumerable<GetToDoListItemDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = (await _service.GetAllAsync()).OrderByDescending(t => t.Created);
+            var result = (await _service.GetAll().ToListAsync(cancellationToken)).OrderByDescending(t => t.Created);
 
             return _mapper.Map<IEnumerable<GetToDoListItemDTO>>(result);
         }
 
-        public async Task UpdateToDoListItemAsync(UpdateToDoListItemDTO dto)
+        public async Task UpdateToDoListItemAsync(UpdateToDoListItemDTO dto, CancellationToken cancellationToken)
         {
-            var item = await _service.GetByIdAsync(dto.Id);
+            var item = await _service.GetByIdAsync(dto.Id, cancellationToken);
             if (item == null)
             {
                 return;
@@ -58,7 +59,7 @@ namespace ToDoList.BLL.Services
             _mapper.Map(dto, item);
 
             _service.UpdateToDoListItem(item);
-            await _service.SaveChangeAsync();
+            await _service.SaveChangeAsync(cancellationToken);
         }
     }
 }
