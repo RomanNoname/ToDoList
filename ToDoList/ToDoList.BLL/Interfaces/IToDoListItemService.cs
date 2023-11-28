@@ -10,5 +10,7 @@ namespace ToDoList.BLL.Interfaces
         public Task DeleteToDoListItemAsync(Guid id,CancellationToken cancellationToken);
 
         public Task UpdateToDoListItemAsync(UpdateToDoListItemDTO dto, CancellationToken cancellationToken);
+
+        public bool IsExist(Guid id);
     }
 }

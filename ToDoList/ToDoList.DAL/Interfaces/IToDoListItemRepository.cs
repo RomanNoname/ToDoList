@@ -11,5 +11,7 @@ namespace ToDoList.DAL.Interfaces
 
         public void UpdateToDoListItem(ToDoListItem item);
         public Task SaveChangeAsync(CancellationToken cancellationToken);
+
+        public bool IsExist(Guid id);
     }
 }

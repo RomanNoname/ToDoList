@@ -33,6 +33,11 @@ namespace ToDoList.DAL.Repositories
             return await _context.ToDoListItems.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
         }
 
+        public bool IsExist(Guid id)
+        {
+            return _context.ToDoListItems.Any(t => t.Id == id);
+        }
+
         public async Task SaveChangeAsync(CancellationToken cancellationToken = default)
         {
             await _context.SaveChangesAsync(cancellationToken);

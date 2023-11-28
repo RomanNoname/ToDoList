@@ -31,9 +31,15 @@ namespace ToDoList.WEB.Controllers
 
             return NoContent();
         }
+
         [HttpPut]
         public async Task<IActionResult> Update(UpdateToDoListItemDTO item, CancellationToken cancellationToken)
         {
+            if(!_listItemService.IsExist(item.Id))
+            {
+                return NoContent();
+            }
+
             await _listItemService.UpdateToDoListItemAsync(item, cancellationToken);
 
             return Ok();

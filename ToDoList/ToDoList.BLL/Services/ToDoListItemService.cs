@@ -48,6 +48,11 @@ namespace ToDoList.BLL.Services
             return _mapper.Map<IEnumerable<GetToDoListItemDTO>>(result);
         }
 
+        public bool IsExist(Guid id)
+        {
+            return _service.IsExist(id);
+        }
+
         public async Task UpdateToDoListItemAsync(UpdateToDoListItemDTO dto, CancellationToken cancellationToken)
         {
             var item = await _service.GetByIdAsync(dto.Id, cancellationToken);

@@ -8,7 +8,7 @@ namespace ToDoList.DAL
         public DbSet<ToDoListItem> ToDoListItems { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-           
+           Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
