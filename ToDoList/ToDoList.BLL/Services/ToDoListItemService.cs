@@ -63,6 +63,8 @@ namespace ToDoList.BLL.Services
 
             _mapper.Map(dto, item);
 
+            item.Updated = DateTime.UtcNow;
+
             _service.UpdateToDoListItem(item);
             await _service.SaveChangeAsync(cancellationToken);
         }

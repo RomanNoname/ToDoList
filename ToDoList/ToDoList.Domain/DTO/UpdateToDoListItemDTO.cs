@@ -7,6 +7,6 @@ namespace ToDoList.Domain.DTO
         [MaxLength(100)]
         [Required]
         string Title,
-        bool IsFinished,
-        DateTime Created);
+        bool IsFinished
+        );
 }
