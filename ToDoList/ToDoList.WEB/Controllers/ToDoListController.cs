@@ -15,7 +15,7 @@ namespace ToDoList.WEB.Controllers
             _listItemService = service;
         }
 
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Client, NoStore = false)]
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             return View(await _listItemService.GetAllAsync(cancellationToken));
@@ -26,6 +26,12 @@ namespace ToDoList.WEB.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [ResponseCache(Duration = 240, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult SomeTrouble()
+        {
+            return View();
         }
     }
 }

@@ -19,6 +19,8 @@ namespace ToDoList.WEB.Middlewares
                     {
                         var errorMessage = $"INTERNAL SERVER ERROR {contextFeature.Error} {context.Response.StatusCode} ";
                         logger.LogError(errorMessage);
+
+                        context.Response.Redirect("/ToDoList/SomeTrouble");
                     }
                 });
             });
