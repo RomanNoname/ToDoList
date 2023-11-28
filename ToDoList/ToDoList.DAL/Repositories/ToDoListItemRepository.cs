@@ -13,9 +13,9 @@ namespace ToDoList.DAL.Repositories
             _context = context;
         }
 
-        public async Task CreateToDoListItemAsync(ToDoListItem item)
+        public async Task CreateToDoListItemAsync(ToDoListItem item, CancellationToken cancellationToken = default)
         {
-            await _context.ToDoListItems.AddAsync(item);
+            await _context.ToDoListItems.AddAsync(item, cancellationToken);
         }
 
         public void DeleteToDoListItem(ToDoListItem item)
@@ -23,19 +23,24 @@ namespace ToDoList.DAL.Repositories
             _context.ToDoListItems.Remove(item);
         }
 
-        public async Task<IEnumerable<ToDoListItem>> GetAllAsync()
+        public IQueryable<ToDoListItem> GetAll()
         {
-            return await _context.ToDoListItems.ToListAsync();
+            return _context.ToDoListItems.AsQueryable();
         }
 
-        public async Task<ToDoListItem?> GetByIdAsync(Guid id)
+        public async Task<ToDoListItem?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _context.ToDoListItems.FirstOrDefaultAsync(t => t.Id == id);
+            return await _context.ToDoListItems.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
         }
 
-        public async Task SaveChangeAsync()
+        public bool IsExist(Guid id)
         {
-            await _context.SaveChangesAsync();
+            return _context.ToDoListItems.Any(t => t.Id == id);
+        }
+
+        public async Task SaveChangeAsync(CancellationToken cancellationToken = default)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public void UpdateToDoListItem(ToDoListItem item)

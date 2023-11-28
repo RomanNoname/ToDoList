@@ -17,24 +17,30 @@ namespace ToDoList.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateToDoListItemDTO item)
+        public async Task<IActionResult> Post(CreateToDoListItemDTO item, CancellationToken cancellationToken)
         {
-            var result = await  _listItemService.CreateToDoListItem(item);
+            var result = await  _listItemService.CreateToDoListItemAsync(item, cancellationToken);
 
             return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
-           await _listItemService.DeleteToDoListItemAsync(id);
+           await _listItemService.DeleteToDoListItemAsync(id, cancellationToken);
 
             return NoContent();
         }
+
         [HttpPut]
-        public async Task<IActionResult> Update(UpdateToDoListItemDTO item)
+        public async Task<IActionResult> Update(UpdateToDoListItemDTO item, CancellationToken cancellationToken)
         {
-            await _listItemService.UpdateToDoListItemAsync(item);
+            if(!_listItemService.IsExist(item.Id))
+            {
+                return NoContent();
+            }
+
+            await _listItemService.UpdateToDoListItemAsync(item, cancellationToken);
 
             return Ok();
         }

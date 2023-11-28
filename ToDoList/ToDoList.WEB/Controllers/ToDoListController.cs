@@ -15,9 +15,10 @@ namespace ToDoList.WEB.Controllers
             _listItemService = service;
         }
 
-        public async Task<IActionResult> Index()
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Client, NoStore = false)]
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View(await _listItemService.GetAllAsync());
+            return View(await _listItemService.GetAllAsync(cancellationToken));
         }
 
 
